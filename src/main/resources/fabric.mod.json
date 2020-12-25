@@ -1,0 +1,29 @@
+{
+    "schemaVersion": 1,
+    "id": "absent",
+    "version": "${version}",
+
+    "name": "absent",
+    "description": "",
+    "authors": [
+        "user11681"
+    ],
+    "contact": {
+        "repo": "https://github.com/user11681/absent"
+    },
+
+    "license": "LGPL-3.0",
+    "icon": "assets/absent/icon.png",
+
+    "environment": "*",
+    "entrypoints": {},
+
+    "mixins": [
+        "absent.mixins.json"
+    ],
+
+    "depends": {
+        "fabricloader": ">=0.10.8",
+        "minecraft": "1.16.4"
+    }
+}

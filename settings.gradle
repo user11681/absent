@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        jcenter()
+        gradlePluginPortal()
+
+        maven {url = "https://maven.fabricmc.net/"}
+    }
+}
+
+rootProject.name = "absent"

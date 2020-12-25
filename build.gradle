@@ -1,0 +1,50 @@
+plugins {
+    id("maven-publish")
+    id("fabric-loom").version("0.6-SNAPSHOT")
+}
+
+sourceCompatibility = 8
+targetCompatibility = 8
+
+project.version = "0.0.0"
+project.group = "user11681"
+
+final String minecraftVersion = "1.16.4"
+final String yarnBuild = "7"
+
+dependencies {
+    minecraft("com.mojang:minecraft:${minecraftVersion}")
+    mappings("net.fabricmc:yarn:${minecraftVersion}+build.${yarnBuild}:v2")
+    modApi("net.fabricmc:fabric-loader:+")
+}
+
+processResources {
+    inputs.property("version", project.version)
+
+    filesMatching("fabric.mod.json") {
+        expand("version": project.version)
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier.set("sources")
+
+    from(sourceSets.main.allSource)
+}
+
+jar {
+    from "LICENSE"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact(remapJar).builtBy(remapJar)
+            artifact(sourcesJar).builtBy(remapSourcesJar)
+        }
+    }
+}
